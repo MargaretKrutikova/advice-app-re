@@ -1,0 +1,16 @@
+.DS_Store
+/node_modules*
+finalOutput/*.js
+.merlin
+.install
+/lib/bs/
+/lib/ocaml/
+*.log
+.bsb.lock
+/src/*.js
+_esy
+build
+*.install
+
+# Editor
+/.idea/

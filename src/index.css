@@ -1,0 +1,231 @@
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:700);
+
+* {
+  font-family: "Open Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+ol {
+  padding-inline-start: 20px;
+}
+
+.background {
+  background: url(https://source.unsplash.com/TV2gg2kZD1o/1920x1080);
+  background-repeat: no-repeat;
+  background-origin: content-box;
+  background-position: center top;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+}
+
+#root {
+  text-align: center;
+  display: flex;
+  color: white;
+  min-height: 100vh;
+  height: 100%;
+}
+
+.content {
+  width: 70%;
+  padding: 10vh 0;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.panel {
+  flex: 1 1 50%;
+  padding: 30px;
+  background: rgba(20, 40, 40, 0.8);
+  border-radius: 10px;
+  box-shadow: 3px 10px 20px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.text-input {
+  margin: 15px 0;
+  font-size: 20px;
+  padding: 10px;
+  width: 250px;
+  border: none;
+  border-bottom: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, 0.2);
+  color: white;
+  outline: none;
+  border-radius: 0;
+}
+
+button {
+  border: 1px solid rgba(10, 180, 180, 1);
+  background: rgba(20, 20, 20, 0.6);
+  font-size: 18px;
+  color: white;
+  margin: 10px 0 20px 0;
+  padding: 10px 50px;
+  cursor: pointer;
+  transition: 0.4s;
+  flex: 0 0 auto;
+}
+
+button:hover {
+  background: rgba(20, 20, 20, 0.8);
+  padding: 10px 80px;
+}
+
+.delimiter {
+  flex: 0 0 50px;
+}
+
+.search-result {
+  font-size: 20px;
+  line-height: 1.5;
+}
+
+.title {
+  font-size: 28px;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+}
+
+.title--small {
+  font-size: 24px;
+}
+
+.random-advice {
+  font-size: 33px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  padding: 10px 20px 10px 35px;
+  position: relative;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.random-advice:before {
+  content: "\201C";
+  margin-right: 6px;
+}
+
+.random-advice:after {
+  content: "\201D";
+  margin-left: 6px;
+}
+
+.random-advice-container {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.random-advice-container::before {
+  content: " ";
+  width: 4px;
+  height: 100%;
+  background-color: rgba(10, 180, 180, 1);
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  box-shadow: 0px 2px 6px rgba(10, 180, 180, 0.6);
+}
+
+.search-result-list {
+  list-style: none;
+  counter-reset: search-result-counter;
+  margin-left: 20px;
+}
+
+.search-result-item {
+  position: relative;
+  counter-increment: search-result-counter;
+  font-size: 22px;
+  line-height: 1.5;
+  letter-spacing: 1px;
+  padding: 10px 0 10px 15px;
+  position: relative;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.search-result-item::before {
+  content: counter(search-result-counter) ". ";
+  color: rgba(10, 180, 180, 1);
+  font-weight: 700;
+  font-size: 30px;
+  font-style: italic;
+  margin-left: -40px;
+  margin-right: 5px;
+  text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2);
+}
+
+@media only screen and (max-width: 1320px) {
+  .content {
+    width: 90%;
+  }
+  .search-result-list {
+    margin-left: 10px;
+  }
+}
+
+@media only screen and (max-width: 900px) {
+  .content {
+    width: 100%;
+    padding: 10vh 20px;
+  }
+  .delimiter {
+    flex: 0 0 20px;
+  }
+}
+
+@media only screen and (max-width: 700px) {
+  .content {
+    padding: 40px 20px;
+    width: 100%;
+    flex-direction: column-reverse;
+    justify-content: initial;
+  }
+  .panel {
+    padding: 10px;
+    flex: auto;
+  }
+  .random-advice {
+    font-size: 22px;
+    padding-left: 30px;
+    padding-right: 10px;
+  }
+  .random-advice-container {
+    margin-bottom: 20px;
+    margin-top: 0;
+  }
+  button {
+    margin-bottom: 10px;
+  }
+  .title--small {
+    font-size: 18px;
+    letter-spacing: normal;
+  }
+  .search-result-item {
+    font-size: 18px;
+  }
+  .search-result-item::before {
+    font-size: 22px;
+    margin-left: -30px;
+  }
+  .search-result-list {
+    margin: 0;
+  }
+}
