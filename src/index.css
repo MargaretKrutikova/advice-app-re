@@ -17,10 +17,11 @@ ol {
 }
 
 .background {
-  background: url(https://source.unsplash.com/TV2gg2kZD1o/1920x1080);
+  /* background: url(https://source.unsplash.com/TV2gg2kZD1o/1920x1080); */
   background-repeat: no-repeat;
   background-origin: content-box;
   background-position: center top;
+  background-color: dimgray;
   position: fixed;
   width: 100%;
   height: 100%;
@@ -172,7 +173,7 @@ button:hover {
   text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2);
 }
 
-@media only screen and (max-width: 1320px) {
+@media only screen and (max-width: 1520px) {
   .content {
     width: 90%;
   }
