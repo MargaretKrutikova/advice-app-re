@@ -146,16 +146,14 @@ let make = () => {
             onKeyDown=handleKeyDown
             disabled={RemoteData.isLoading(state.searchResult)}
           />
+          {RemoteData.isLoading(state.searchResult)
+             ? <div> {ReasonReact.string("Loading...")} </div>
+             : ReasonReact.null}
           {switch (state.searchResult) {
-           | NotAsked => ReasonReact.null
-           | Success(data) => <SearchResult data />
-           | Loading(result) =>
-             <>
-               <div> {ReasonReact.string("Loading...")} </div>
-               {result
-                ->Belt.Option.flatMap(data => Some(<SearchResult data />))
-                ->Belt.Option.getWithDefault(ReasonReact.null)}
-             </>
+           | NotAsked
+           | Loading(None) => ReasonReact.null
+           | Success(data)
+           | Loading(Some(data)) => <SearchResult data />
            | Failure(err) => <div> {ReasonReact.string(err)} </div>
            }}
         </div>
