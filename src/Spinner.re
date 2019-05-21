@@ -1,4 +1,6 @@
 [@react.component]
 let make = (~show=false) => {
-  show ? <div className="spinner" /> : ReasonReact.null;
+  <div className="spinner-container">
+    {show ? <div className="spinner" /> : ReasonReact.null}
+  </div>;
 };

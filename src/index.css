@@ -149,6 +149,7 @@ button:hover {
   list-style: none;
   counter-reset: search-result-counter;
   margin-left: 20px;
+  margin-top: 0;
 }
 
 .search-result-item {
@@ -174,12 +175,21 @@ button:hover {
   text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2);
 }
 
+.spinner-container {
+  position: relative;
+  display: flex;
+  height: 25px;
+  justify-content: center;
+  align-items: center;
+}
+
 .spinner {
-  border: 3px solid hsla(185, 100%, 62%, 0.2);
+  border: 2px solid hsla(185, 100%, 62%, 0.2);
   border-top-color: #3cefff;
+  position: absolute;
   border-radius: 50%;
-  width: 3em;
-  height: 3em;
+  width: 30px;
+  height: 30px;
   animation: spin 1s linear infinite;
   margin: 0 auto;
 }

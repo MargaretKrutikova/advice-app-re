@@ -57,9 +57,9 @@ let fetchRandom = dispatch => {
 };
 
 let maxItems = 10;
-let limitSearchResult = ({total_results, items}: searchResponse) => {
+let transformSearchResult = ({total_results, items}: searchResponse) => {
   total_results,
-  items: items->Belt.Array.slice(0, maxItems),
+  items: items->Belt.Array.shuffle->Belt.Array.slice(0, maxItems),
 };
 
 let searchAdvice = (query, dispatch) => {
@@ -70,7 +70,9 @@ let searchAdvice = (query, dispatch) => {
          switch (result) {
          | Belt.Result.Ok(response) =>
            dispatch(
-             SearchRequest(RequestSuccess(response |> limitSearchResult)),
+             SearchRequest(
+               RequestSuccess(response |> transformSearchResult),
+             ),
            )
            |> resolve
          | Belt.Result.Error () =>
@@ -124,8 +126,6 @@ let make = () => {
             onKeyDown=handleKeyDown
             disabled={RemoteData.isLoading(state.searchResult)}
           />
-          /* {RemoteData.isLoading(state.searchResult)
-             ? <div className="loader" /> : ReasonReact.null} */
           {switch (state.searchResult) {
            | NotAsked =>
              <Message type_=Information text="You haven't searched yet!" />
