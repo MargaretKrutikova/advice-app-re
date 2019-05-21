@@ -1,3 +1,3 @@
 [%raw {|require('./index.css')|}];
 
-ReactDOMRe.renderToElementWithId(<SearchAdvice />, "root");
+ReactDOMRe.renderToElementWithId(<AdviceApp />, "root");

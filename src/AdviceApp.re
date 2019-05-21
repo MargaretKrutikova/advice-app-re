@@ -56,6 +56,12 @@ let fetchRandom = dispatch => {
   );
 };
 
+let maxItems = 10;
+let limitSearchResult = ({total_results, items}: searchResponse) => {
+  total_results,
+  items: items->Belt.Array.slice(0, maxItems),
+};
+
 let searchAdvice = (query, dispatch) => {
   dispatch(SearchRequest(RequestLoading));
   Js.Promise.(
@@ -63,7 +69,10 @@ let searchAdvice = (query, dispatch) => {
     |> then_(result =>
          switch (result) {
          | Belt.Result.Ok(response) =>
-           dispatch(SearchRequest(RequestSuccess(response))) |> resolve
+           dispatch(
+             SearchRequest(RequestSuccess(response |> limitSearchResult)),
+           )
+           |> resolve
          | Belt.Result.Error () =>
            dispatch(
              SearchRequest(
