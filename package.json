@@ -24,7 +24,7 @@
     "remotedata-re": "^0.2.1"
   },
   "devDependencies": {
-    "bs-platform": "^5.0.2",
+    "bs-platform": "^5.0.4",
     "css-loader": "^2.1.1",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.6.0",
