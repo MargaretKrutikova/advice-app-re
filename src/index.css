@@ -105,7 +105,7 @@ button:hover {
 }
 
 .random-advice {
-  font-size: 33px;
+  font-size: 30px;
   line-height: 1.5;
   letter-spacing: 1px;
   padding: 10px 20px 10px 35px;
@@ -171,6 +171,29 @@ button:hover {
   margin-left: -40px;
   margin-right: 5px;
   text-shadow: 0px 2px 6px rgba(255, 255, 255, 0.2);
+}
+
+.spinner {
+  border: 3px solid hsla(185, 100%, 62%, 0.2);
+  border-top-color: #3cefff;
+  border-radius: 50%;
+  width: 3em;
+  height: 3em;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.message--info {
+  color: hsla(185, 100%, 62%, 0.2);
+}
+
+.message--error {
+  color: rgba(172, 0, 0, 0.993);
 }
 
 @media only screen and (max-width: 1520px) {

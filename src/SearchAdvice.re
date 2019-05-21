@@ -1,4 +1,5 @@
 open Api;
+open Types;
 
 type remoteSearchResult = WebData.t(searchResponse);
 type remoteRandomAdvice = WebData.t(advice);
@@ -46,9 +47,7 @@ let fetchRandom = dispatch => {
          | Belt.Result.Error () =>
            dispatch(
              RandomAdviceRequest(
-               RequestError(
-                 "Sorry, something bad happened! Please, try again.",
-               ),
+               RequestError("An error occured! Please, try again."),
              ),
            )
            |> resolve
@@ -68,9 +67,7 @@ let searchAdvice = (query, dispatch) => {
          | Belt.Result.Error () =>
            dispatch(
              SearchRequest(
-               RequestError(
-                 "Sorry, something bad happened! Please, try again.",
-               ),
+               RequestError("An error occured! Please, try again."),
              ),
            )
            |> resolve
@@ -79,40 +76,12 @@ let searchAdvice = (query, dispatch) => {
   );
 };
 
-module SearchResult = {
-  [@react.component]
-  let make = (~data: searchResponse) => {
-    switch (data.items) {
-    | [||] => ReasonReact.string("Ooops... No advice found!")
-    | items =>
-      <ol className="search-result-list">
-        {items
-         |> Array.map(item =>
-              <li key={item.id} className="search-result-item">
-                {ReasonReact.string(item.value)}
-              </li>
-            )
-         |> ReasonReact.array}
-      </ol>
-    };
-  };
-};
-
-module RandomAdvice = {
-  [@react.component]
-  let make = (~data: advice) => {
-    <div className="random-advice-container">
-      <div className="random-advice"> {ReasonReact.string(data.value)} </div>
-    </div>;
-  };
-};
-
 [@react.component]
 let make = () => {
   let (state, dispatch) = React.useReducer(reducer, initialState);
 
   React.useEffect0(() => {
-    searchAdvice("hair", dispatch) |> ignore;
+    fetchRandom(dispatch) |> ignore;
     None;
   });
 
@@ -146,15 +115,18 @@ let make = () => {
             onKeyDown=handleKeyDown
             disabled={RemoteData.isLoading(state.searchResult)}
           />
-          {RemoteData.isLoading(state.searchResult)
-             ? <div> {ReasonReact.string("Loading...")} </div>
-             : ReasonReact.null}
+          /* {RemoteData.isLoading(state.searchResult)
+             ? <div className="loader" /> : ReasonReact.null} */
           {switch (state.searchResult) {
-           | NotAsked
-           | Loading(None) => ReasonReact.null
-           | Success(data)
-           | Loading(Some(data)) => <SearchResult data />
-           | Failure(err) => <div> {ReasonReact.string(err)} </div>
+           | NotAsked =>
+             <Message type_=Information text="You haven't searched yet!" />
+           | Loading(None) => <Spinner show=true />
+           | (Success(data) | Loading(Some(data))) as searchState =>
+             <>
+               <Spinner show={RemoteData.isLoading(searchState)} />
+               <SearchResult data />
+             </>
+           | Failure(err) => <Message type_=Error text=err />
            }}
         </div>
       </div>
@@ -173,7 +145,7 @@ let make = () => {
          | Success(data) => <RandomAdvice data />
          | Loading(result) =>
            <>
-             <div> {ReasonReact.string("Loading...")} </div>
+             <div className="loader" />
              {result
               ->Belt.Option.flatMap(data => Some(<RandomAdvice data />))
               ->Belt.Option.getWithDefault(ReasonReact.null)}
