@@ -1,5 +1,5 @@
 {
-  "name": "api-explorer",
+  "name": "advice-app-re",
   "version": "0.1.0",
   "scripts": {
     "build": "bsb -make-world",
