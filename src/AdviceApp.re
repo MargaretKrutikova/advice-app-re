@@ -56,7 +56,7 @@ let fetchRandom = dispatch => {
   );
 };
 
-let maxItems = 10;
+let maxItems = 6;
 let transformSearchResult = ({total_results, items}: searchResponse) => {
   total_results,
   items: items->Belt.Array.shuffle->Belt.Array.slice(0, maxItems),
@@ -147,7 +147,7 @@ let make = () => {
           {ReasonReact.string("Refresh")}
         </button>
         <h2 className="title title--small">
-          {ReasonReact.string("Wisdom of the day:")}
+          {ReasonReact.string("Random wisdom:")}
         </h2>
         {switch (state.randomAdvice) {
          | NotAsked => ReasonReact.null
