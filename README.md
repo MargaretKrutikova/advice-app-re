@@ -1,5 +1,8 @@
 # Advice app
 
+Advice generator hosted at https://advice-app-re.netlify.com/.
+
+
 ## Run Project
 
 ```sh
